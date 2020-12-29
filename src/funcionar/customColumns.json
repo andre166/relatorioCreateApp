@@ -1,0 +1,73 @@
+[
+    {
+        "field":"ticket",
+        "title":"Ticket",
+        "type":"string",
+        "virtualizedWidth": 380
+    },
+    
+    {
+        "field":"codcli",
+        "title":"Cód Cliente",
+        "type":"string",
+        "virtualizedWidth": 120
+    },
+    {
+        "field":"nome_cli",
+        "title":"Cliente",
+        "type":"string",
+        "virtualizedWidth": 360
+    },
+    {
+        "field":"cidade",
+        "title":"Cidade",
+        "type":"string",
+        "renderGraph":true,
+        "virtualizedWidth": 140
+    },
+    {
+        "field":"bairro",
+        "title":"Bairro",
+        "type":"string",
+        "renderGraph":true,
+        "virtualizedWidth": 240
+    },
+    {
+        "field":"data_ticket",
+        "title":"Abertura Ticket",
+        "type":"date",
+        "virtualizedWidth": 120
+    },
+    {
+        "field":"data_agendamento",
+        "title":"Pré Agendamento",
+        "type":"date",
+        "virtualizedWidth": 120
+    },
+    {
+        "field":"plano",
+        "title":"Plano",
+        "type":"string",
+        "renderGraph":true,
+        "virtualizedWidth": 510
+    },
+    {
+        "field":"tipo_atividade",
+        "title":"Atividade",
+        "type":"string",
+        "renderGraph":true,
+        "virtualizedWidth": 140
+    },
+    {  
+        "field":"estado_atividade",
+        "title":"Status",
+        "type":"string",
+        "virtualizedWidth": 180
+    },
+    {
+        "field":"Motivo",
+        "title":"Motivo Cancelamento",
+        "type":"string",
+        "virtualizedWidth": 200
+    }
+]

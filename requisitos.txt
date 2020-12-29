@@ -1,0 +1,6 @@
+2 - se clicar na fatia da pizza, incluir o valor no filtro dessa coluna se clicar 
+    de volta, retirar o valor;
+    exemplo, cliquei na fatia nova ativação, vai filtrar tipo de atividade por nova 
+    ativação, ai a pizza vai virar toda uma só nessa aba mas ai eu navego nas outras,
+    um atalho pro usuario ir filtrando o que ele quer pelo grafico.
+3 - tira o credits do grafico.
