@@ -70,18 +70,6 @@ async array1(){
 
       </div>
 
-
-          {/* <Button variant="contained" color="primary" onClick={() => this.array1()}>
-                Array1
-            </Button>
-
-            <Button variant="contained" color="primary" style={{margin: '10px'}} onClick={() => this.array2()}>
-                Array2
-            </Button>
-
-            <Button variant="contained" color="primary" onClick={() =>  this.array3()}>
-                Array3
-            </Button> */}
       </>
     );
   }
