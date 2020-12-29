@@ -3,6 +3,7 @@ import RelatorioTable from './components/relatorio/relatorioTable';
 import { Provider } from 'react-redux';
 import PropTypes from 'prop-types';
 import store from './store';
+import { AutoSizer } from 'react-virtualized';
 
 class ShowRelatorio extends Component {
 
@@ -58,12 +59,10 @@ class ShowRelatorio extends Component {
   render(){
     const props = this.props;
     return (
-    <Provider store={store}>
-        <div>
+    <Provider store={store} style={{height: '100%'}}>
           {this.state.renderRelatorio == false ? '' :
             <RelatorioTable {...props} relatorio={this.props.relatorio} customColumns={this.props.customColumns} renderGraphBtn={this.renderizarGraphBtn()} TableDimension={this.props.TableDimension}/>
           }
-        </div>
     </Provider>
     );
   }

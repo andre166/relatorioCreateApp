@@ -196,7 +196,7 @@ export class MTableHeader extends React.Component {
       ...MTableHeader.defaultProps.localization,
       ...this.props.localization,
     };
-    const width = 100;
+    // const width = 100;
     return (
       <TableCell
         key="key-actions-column"
@@ -204,7 +204,7 @@ export class MTableHeader extends React.Component {
         className={this.props.classes.header}
         style={{
           ...this.props.headerStyle,
-          width: width,
+          width: '100%',
           textAlign: "center",
           boxSizing: "border-box",
         }}
@@ -289,8 +289,7 @@ export class MTableHeader extends React.Component {
         0,
         0,
         <TableCell
-        style={{border: 'none'}}
-
+          style={{border: 'none'}}
           padding="none"
           key={"key-tree-data-header"}
           className={this.props.classes.header}
@@ -304,7 +303,7 @@ export class MTableHeader extends React.Component {
           0,
           0,
           <TableCell
-            style={{border: 'none'}}
+            
             padding="checkbox"
             key={"key-group-header" + columnDef.tableData.id}
           />
@@ -312,9 +311,8 @@ export class MTableHeader extends React.Component {
       });
 
     return (
-      <div style={{width: this.props.colunas[0].virtualizedWidth || '100%', margin: 0}}>
-        {headers}
-      </div>
+      // <TableCell style={{border: '1px solid red'}}>
+      headers
     );
   }
 }

@@ -10,6 +10,7 @@ import { arrayColunasTeste, arrayDadosTeste} from './array';
 import Virtual from './virtualized';
 import cc from './funcionar/customColumns';
 import rela from './funcionar/relatorio.json';
+import Table from './testeTable';
 
 class App extends Component {
 
@@ -53,24 +54,26 @@ async array1(){
   render(){
     
     return (
-      <>
+      < div style={{height: '100%'}}>
 
-      <div >
+      <div style={{height: '100%'}}>
           <ShowRelatorio 
-          relatorio={consolidado} 
-          customColumns ={customColumns}
+          // relatorio={consolidado} 
+          // customColumns ={customColumns}
 
-          // relatorio={arrayDadosTeste} 
-          // customColumns ={ arrayColunasTeste}
-          tableHeight={600}
+          relatorio={arrayDadosTeste} 
+          customColumns ={ arrayColunasTeste}
           // relatorio={rela} 
           // customColumns={ cc}
           
+          // tableHeight={400}
           />
 
       </div>
 
-      </>
+      <Table/>
+
+      </div>
     );
   }
 }

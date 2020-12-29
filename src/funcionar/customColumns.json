@@ -48,26 +48,22 @@
         "field":"plano",
         "title":"Plano",
         "type":"string",
-        "renderGraph":true,
-        "virtualizedWidth": 510
+        "renderGraph":true
     },
     {
         "field":"tipo_atividade",
         "title":"Atividade",
         "type":"string",
-        "renderGraph":true,
-        "virtualizedWidth": 140
+        "renderGraph":true
     },
     {  
         "field":"estado_atividade",
         "title":"Status",
-        "type":"string",
-        "virtualizedWidth": 180
+        "type":"string"
     },
     {
         "field":"Motivo",
         "title":"Motivo Cancelamento",
-        "type":"string",
-        "virtualizedWidth": 200
+        "type":"string"
     }
 ]

@@ -28,13 +28,22 @@ export const styles = {
     BodyGrid : {
       width: '100%',
     },
-      
-    cell: {
+    BodyCell: {
       borderBottom: '1px solid rgba(224, 224, 224, 1)',
+      display: 'flex',
+      alignItems: 'center',
+      fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+      borderSpacing: 0,
+      borderCollapse: 'collapse',
+      color: 'rgba(0, 0, 0, 0.87)',
+      fontSize: '0.8125rem',
+      fontWeight: 400,
+    },
+    cell: {
       width: '100%',
       height: '100%',
       display: 'flex',
-      flexDirection: 'row',
+      flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
       textAlign: 'center',

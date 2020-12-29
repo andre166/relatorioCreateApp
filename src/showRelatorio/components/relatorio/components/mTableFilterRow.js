@@ -12,7 +12,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Tooltip from "@material-ui/core/Tooltip";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider } from "material-ui-pickers";
-
+import TableCell from "@material-ui/core/TableCell";
 import CustomPicker from '../../../../datePicker/datePickerCustom';
 
 const ITEM_HEIGHT = 48;
@@ -38,7 +38,7 @@ class MTableFilterRow extends React.Component {
 
   LookupFilter = ({columnDef}) => (
 
-    <FormControl style={{ width: '100%' }}>
+    <FormControl>
       <InputLabel htmlFor="select-multiple-checkbox">{columnDef.filterPlaceholder}</InputLabel>
       <Select
         multiple
@@ -94,7 +94,7 @@ class MTableFilterRow extends React.Component {
 
     return (
       <TextField
-        style={columnDef.type === "numeric" ? { float: "right" } : {width: columnDef.virtualizedWidth -15}}
+        style={columnDef.type === "numeric" && { float: "right" } || {}}
         type={columnDef.type === "numeric" ? "number" : "search"}
         value={columnDef.tableData.filterValue || ""}
         placeholder={this.getLocalizedFilterPlaceHolder(columnDef)}
@@ -124,7 +124,7 @@ class MTableFilterRow extends React.Component {
 
   renderDateTypeFilter = (columnDef) => {
 
-    const larg = columnDef.virtualizedWidth - 15;
+    // const larg = columnDef.virtualizedWidth - 15;
 
     const onDateInputChange = (date) =>
       this.props.onFilterChanged(columnDef.tableData.id, date);
@@ -137,7 +137,8 @@ class MTableFilterRow extends React.Component {
 
     let dateInputElement = null;
     if (columnDef.type === "date") {
-      dateInputElement = <CustomPicker {...pickerProps} largura={larg}/>;
+      // dateInputElement = <CustomPicker {...pickerProps} largura={larg}/>;
+      dateInputElement = <CustomPicker {...pickerProps}/>;
     } else if (columnDef.type === "datetime") {
       dateInputElement = <CustomPicker {...pickerProps} />;
     } else if (columnDef.type === "time") {
@@ -181,28 +182,29 @@ class MTableFilterRow extends React.Component {
       )
       .sort((a, b) => a.tableData.columnOrder - b.tableData.columnOrder)
       .map((columnDef) => (
-        <div
+        <TableCell
           key={columnDef.tableData.id}
           style={{
             ...this.props.filterCellStyle,
             ...columnDef.filterCellStyle,
+            border: 'none'
           }}
         >
           {this.getComponentForColumn(columnDef)}
-        </div>
+        </TableCell>
       ));
 
     if (this.props.selection) {
       columns.splice(
         0,
         0,
-        <div padding="none" key="key-selection-column" />
+        <TableCell padding="none" style={{border: 'none'}} key="key-selection-column" />
       );
     }
 
     if (this.props.hasActions) {
       if (this.props.actionsColumnIndex === -1) {
-        columns.push(<div key="key-action-column" />);
+        columns.push(<TableCell style={{border: 'none'}} key="key-action-column" />);
       } else {
         let endPos = 0;
         if (this.props.selection) {
@@ -211,7 +213,7 @@ class MTableFilterRow extends React.Component {
         columns.splice(
           this.props.actionsColumnIndex + endPos,
           0,
-          <div key="key-action-column" />
+          <TableCell style={{border: 'none'}} key="key-action-column" />
         );
       }
     }
@@ -222,7 +224,7 @@ class MTableFilterRow extends React.Component {
       columns.splice(
         index,
         0,
-        <div padding="none" key="key-detail-panel-column" />
+        <TableCell style={{border: 'none'}} padding="none" key="key-detail-panel-column" />
       );
     }
 
@@ -230,7 +232,7 @@ class MTableFilterRow extends React.Component {
       columns.splice(
         0,
         0,
-        <div padding="none" key={"key-tree-data-filter"} />
+        <TableCell style={{border: 'none'}} padding="none" key={"key-tree-data-filter"} />
       );
     }
 
@@ -240,7 +242,8 @@ class MTableFilterRow extends React.Component {
         columns.splice(
           0,
           0,
-          <div
+          <TableCell
+            style={{border: 'none'}}
             padding="checkbox"
             key={"key-group-filter" + columnDef.tableData.id}
           />
@@ -248,9 +251,7 @@ class MTableFilterRow extends React.Component {
       });
 
     return (
-      <div style={{height: 40, width: this.props.columns[0].virtualizedWidth || '100%', padding: 0}}>
-        {columns[0]}
-      </div>
+      columns[0]
     );
   }
 }

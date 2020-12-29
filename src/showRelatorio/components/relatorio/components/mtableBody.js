@@ -255,17 +255,14 @@ class MTableBody extends React.Component {
     }
     
     return (
-      <TableBody>
-
-        <Vtable 
-          tableRef={tableRef}
-          qtdColunas={colunas} 
-          renderData={this.props.renderData} 
-          virtualizedTableColum={this.props.virtualizedTableColum}
-          larguraVirtualizedTableColum={this.props.larguraVirtualizedTableColum}
-          {...props}
-        />
-      </TableBody>
+      <Vtable 
+        tableRef={tableRef}
+        qtdColunas={colunas} 
+        renderData={this.props.renderData} 
+        virtualizedTableColum={this.props.virtualizedTableColum}
+        larguraVirtualizedTableColum={this.props.larguraVirtualizedTableColum}
+        {...props}
+      />
     );
   }
 }

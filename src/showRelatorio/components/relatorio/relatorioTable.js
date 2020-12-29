@@ -9,6 +9,7 @@ import MTableBody from './components/mtableBody';
 import tableIcons from './tableIcons';
 import { withStyles } from '@material-ui/core/styles';
 import PieChartDialog from '../pieGraph/pieChartDialog';
+import Paper from '@material-ui/core/Paper';
 // ======== REDUX ========= //
 import { connect } from 'react-redux';
 import { 
@@ -301,7 +302,7 @@ class BasicFiltering extends Component{
         }
 
         return (
-            <div style={{width: tWidth}}>
+            <div style={{width: tWidth, height: '100%'}}>
 
                 { this.props.showError === false ? '' : 
                     <span className={classes.warning}>
@@ -313,6 +314,7 @@ class BasicFiltering extends Component{
                 
                 {this.props.isVisibleTable === true && this.props.showError === false? 
                     <MaterialTable  
+                        style={{height: '100%'}}
                         tableRef={this.tableRef}
                         icons={tableIcons}
                         title={
@@ -395,7 +397,9 @@ class BasicFiltering extends Component{
                                 return (
                                     <>
                                         {this.tableRef.current && headerProps !== '' && 
-                                            <MTableBody {...props} 
+                                            <MTableBody 
+                                                style={{height: '100%'}}
+                                                {...props} 
                                                 tableHeight={this.props.tableHeight}
                                                 tableRef={this.tableRef.current}
                                                 renderData={myRenderData} 
@@ -416,6 +420,8 @@ class BasicFiltering extends Component{
                                     ''
                                 )
                             },
+
+                            Container: props => <Paper {...props} elevation={0}/>
                             
                         }}
                         

@@ -1,11 +1,15 @@
 import React from 'react';
-import { Grid, AutoSizer, ScrollSync } from 'react-virtualized';
+import { Grid, AutoSizer, ScrollSync, ColumnSizer } from 'react-virtualized';
 import MTableFilterRow from './mTableFilterRow';
 import MTableHeader from './mTableHeader';
-import TableHead from "@material-ui/core/TableHead";
 import { withStyles } from '@material-ui/core/styles';
 import { styles } from './style';
 import InfoIcon from '@material-ui/icons/Info';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 class GridBody extends React.PureComponent {
 
@@ -16,13 +20,13 @@ class GridBody extends React.PureComponent {
     this.state = {
       columnWidth: 75,
       columnCount: 50,
-      height: this.props.tableHeight || 300,
+      heightGeral: this.props.tableHeight || 300,
       overscanColumnCount: 0,
       overscanRowCount: 5,
       rowHeight: 40,
       rowCount: 100,
       headerHeight: 50,
-      headerTitleHeight: 60,
+      headerTitleHeight: 120,
       showTableRows: true,
       larguraDaTabela: ''
     };
@@ -77,7 +81,7 @@ class GridBody extends React.PureComponent {
     const {
       columnCount,
       columnWidth,
-    height,
+      heightGeral,
       overscanColumnCount,
       overscanRowCount,
       rowHeight,
@@ -104,82 +108,107 @@ class GridBody extends React.PureComponent {
             const y = scrollTop / (scrollHeight - clientHeight);
 
             return (
-              <div className={classes.GridRow}>
-                <div className={classes.GridColumn}>
+              // <div className={classes.GridRow}>
+                <div style={{width: '100%'}}>
                   <AutoSizer disableHeight>
-                    {({width}) => (
-                      <div>
-                        <TableHead
-                          style={{
-                            borderBottom: '1px solid rgba(224, 224, 224, 1)',
-                            backgroundColor: `#fff`,
-                            height: headerHeight,
-                            width: width,
-                            overflow: 'hidden'
-                          }}>
-                                    
-                          <Grid
-                            ref={this.headerRef}
-                            style={{overflow: 'hidden'}}
-                            columnWidth={this.getColumnWidth}
-                            columnCount={this.props.virtualizedTableColum.length}
-                            height={headerTitleHeight}
-                            overscanColumnCount={overscanColumnCount}
-                            cellRenderer={this._renderTitleCell}
-                            rowHeight={headerTitleHeight}
-                            rowCount={1}
-                            scrollLeft={scrollLeft}
-                            width={width}
-                          />
-                        </TableHead>
+                    {({width, height}) => (
+                            <ColumnSizer
+                                columnMaxWidth={800}
+                                columnMinWidth={150}
+                                columnCount={this.props.virtualizedTableColum.length}
+                                width={width}
+                                height={height}
+                                >
+                                  
+                                {({adjustedWidth, getColumnWidth, registerChild}) => (
+                                   <Table style={{height: height}}>
+                                      <TableHead style={{height: height}}>
+                                        <TableRow style={{height: height}}>
+                                          <Grid
+                                            ref={registerChild}
+                                            style={{overflow: 'hidden'}}
+                                            columnWidth={getColumnWidth}
+                                            columnCount={this.props.virtualizedTableColum.length}
+                                            height={headerTitleHeight}
+                                            overscanColumnCount={overscanColumnCount}
+                                            cellRenderer={this._renderTitleCell}
+                                            rowHeight={headerTitleHeight}
+                                            rowCount={1}
+                                            scrollLeft={scrollLeft}
+                                            width={width}
+                                          />
+                                        </TableRow>
+                                      </TableHead>
+                                      <TableBody>
+                                        <TableRow>
+                                          {this.state.showTableRows && 
+                                            <Grid
+                                              ref={registerChild}
+                                              columnWidth={getColumnWidth}
+                                              columnCount={this.props.qtdColunas.length}
+                                              height={heightGeral}
+                                              onScroll={onScroll}
+                                              overscanColumnCount={overscanColumnCount}
+                                              overscanRowCount={overscanRowCount}
+                                              cellRenderer={this._renderBodyCell}
+                                              rowHeight={rowHeight}
+                                              rowCount={this.props.renderData.length || 1}
+                                              width={width}
+                                            />
+                                          } 
+                                        </TableRow> 
+                                      </TableBody>
 
-                        <div
-                          style={{
-                            backgroundColor: `#fff`,
-                            height: headerHeight,
-                            width: width,
-                            overflow: 'hidden',
-                            borderBottom: '1px solid rgba(224, 224, 224, 1)',
-                          }}>
-                                    
-                          <Grid
-                            style={{overflow: 'hidden'}}
-                            className={classes.HeaderGrid}
-                            columnWidth={this.getColumnWidth}
-                            columnCount={this.props.virtualizedTableColum.length}
-                            height={headerHeight}
-                            overscanColumnCount={overscanColumnCount}
-                            cellRenderer={this._renderHeaderCell}
-                            rowHeight={headerHeight}
-                            rowCount={1}
-                            scrollLeft={scrollLeft}
-                            width={width}
-                          />
-                        </div>
-                        <div
-                          style={{
-                            height: height,
-                            width: width,
-                          }}>
-                          {this.state.showTableRows && <Grid
-                            className={classes.BodyGrid}
-                            columnWidth={this.getColumnWidth}
-                            columnCount={this.props.qtdColunas.length}
-                            height={height}
-                            onScroll={onScroll}
-                            overscanColumnCount={overscanColumnCount}
-                            overscanRowCount={overscanRowCount}
-                            cellRenderer={this._renderBodyCell}
-                            rowHeight={rowHeight}
-                            rowCount={this.props.renderData.length || 1}
-                            width={width}
-                          />}
-                        </div>
-                      </div>
+
+                                      
+                                    </Table>
+
+                                )}
+                              </ColumnSizer>
+
+                        // <TableHead>
+                        //   <TableRow>
+                                      
+                        //     <Grid
+                        //       style={{overflow: 'hidden'}}
+                        //       className={classes.HeaderGrid}
+                        //       columnWidth={this.getColumnWidth}
+                        //       columnCount={this.props.virtualizedTableColum.length}
+                        //       height={headerHeight}
+                        //       overscanColumnCount={overscanColumnCount}
+                        //       cellRenderer={this._renderHeaderCell}
+                        //       rowHeight={headerHeight}
+                        //       rowCount={1}
+                        //       scrollLeft={scrollLeft}
+                        //       width={width}
+                        //     />
+                        //   </TableRow>
+                        // </TableHead> 
+
+                        // <div
+                        //   style={{
+                        //     height: heightGeral,
+                        //     width: width,
+                        //   }}>
+                        //   {this.state.showTableRows && <Grid
+                        //     className={classes.BodyGrid}
+                        //     columnWidth={this.getColumnWidth}
+                        //     columnCount={this.props.qtdColunas.length}
+                        //     height={heightGeral}
+                        //     onScroll={onScroll}
+                        //     overscanColumnCount={overscanColumnCount}
+                        //     overscanRowCount={overscanRowCount}
+                        //     cellRenderer={this._renderBodyCell}
+                        //     rowHeight={rowHeight}
+                        //     rowCount={this.props.renderData.length || 1}
+                        //     width={width}
+                        //   />}
+                        // </div>
+
                     )}
                   </AutoSizer>
-                </div>
               </div>
+              // </div>
             );
           }}
         </ScrollSync>
@@ -191,12 +220,46 @@ class GridBody extends React.PureComponent {
 
     const props = this.props;
     const {classes } = props;
+    let filterProps = this.props.localization;
 
     return (
-      <div className={classes.headerTitleCell} key={key} style={style}>
-          <MTableHeader {...props} colunas={[this.props.columns[columnIndex]]} setShowTableRows={this.setShowTableRows} />
-      </div>
+      <TableCell className={classes.cell} key={key} style={style}>
 
+          <div>
+            <MTableHeader {...props} colunas={[this.props.columns[columnIndex]]} setShowTableRows={this.setShowTableRows} />
+          </div>
+
+          <div>
+            <MTableFilterRow
+            columns={[this.props.columns[columnIndex]]}
+            icons={this.props.icons}
+            hasActions={
+            this.props.actions.filter(
+                (a) => a.position === "row" || typeof a === "function"
+            ).length > 0
+            }
+            actionsColumnIndex={this.props.options.actionsColumnIndex}
+            onFilterChanged={this.props.onFilterChanged}
+            selection={this.props.options.selection}
+            localization={{
+              ...filterProps,
+            ...this.props.localization.filterRow,
+            dateTimePickerLocalization: this.props.localization
+                .dateTimePickerLocalization,
+            }}
+            hasDetailPanel={!!this.props.detailPanel}
+            detailPanelColumnAlignment={
+            this.props.options.detailPanelColumnAlignment
+            }
+            isTreeData={this.props.isTreeData}
+            filterCellStyle={this.props.options.filterCellStyle}
+            filterRowStyle={this.props.options.filterRowStyle}
+            hideFilterIcons={this.props.options.hideFilterIcons}
+            scrollWidth={this.props.scrollWidth}
+          />
+
+          </div>
+      </TableCell>
     )
 
   }
@@ -208,8 +271,7 @@ class GridBody extends React.PureComponent {
 
     return (
       
-      <div className={classes.headerCell} key={key} style={style}>
-
+      // <div className={classes.headerCell} key={key} style={style}>
 
         <MTableFilterRow
           columns={[this.props.columns[columnIndex]]}
@@ -239,7 +301,7 @@ class GridBody extends React.PureComponent {
           scrollWidth={this.props.scrollWidth}
         />
 
-      </div>
+      // </div>
       
     );
 
@@ -249,13 +311,18 @@ class GridBody extends React.PureComponent {
 
     const { classes } = this.props
 
+    console.log("style={style}", style)
+
     if( this.props.renderData.length == 0 && rowIndex == 0){ //Força a tabla a manter sua largura original caso não haja registro
       return <div style={{position: 'absolute', background: '#FFF4E5', 
       width: '100%', padding: 5, margin: 5, display: 'flex', alignItems: 'center'}}> <InfoIcon style={{marginRight: 4}}/> Nenhum registro</div>
 
     }else if( this.props.renderData.length > 0 ){
+
       return (
-        <div className={classes.cell} key={key} style={style}>
+
+        // <TableCell align="right" className={classes.cell} key={key} style={style}>
+        <div className={classes.BodyCell} style={style}>
           {this.props.renderData[rowIndex][this.props.virtualizedTableColum[columnIndex]]}
         </div>
       );
