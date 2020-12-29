@@ -261,6 +261,7 @@ class MTableBody extends React.Component {
         renderData={this.props.renderData} 
         virtualizedTableColum={this.props.virtualizedTableColum}
         larguraVirtualizedTableColum={this.props.larguraVirtualizedTableColum}
+        virtualWidth={this.props.virtualWidth}
         {...props}
       />
     );

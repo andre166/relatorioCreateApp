@@ -406,6 +406,7 @@ class BasicFiltering extends Component{
                                                 virtualizedTableColum={this.props.virtualizedTableColum}
                                                 larguraVirtualizedTableColum={this.props.larguraVirtualizedTableColum}
                                                 headerProps={headerProps}
+                                                virtualWidth={this.props.virtualWidth}
                                             />
                                         }
                                     </>
@@ -420,8 +421,6 @@ class BasicFiltering extends Component{
                                     ''
                                 )
                             },
-
-                            Container: props => <Paper {...props} elevation={0}/>
                             
                         }}
                         

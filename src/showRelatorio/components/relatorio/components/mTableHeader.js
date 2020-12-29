@@ -303,7 +303,7 @@ export class MTableHeader extends React.Component {
           0,
           0,
           <TableCell
-            
+            style={{border: 'none'}}
             padding="checkbox"
             key={"key-group-header" + columnDef.tableData.id}
           />

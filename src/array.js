@@ -4,8 +4,13 @@ const arrayColunasTeste = [
     title: 'Data Atual no title consertado', 
     field: 'data', 
     renderGraph: true,
-    type: 'date',
     
+  },
+  { 
+    title: 'Data Atual no title consertado', 
+    field: 'data', 
+    renderGraph: true,
+    type: 'date',
 
   },
   { 
@@ -13,16 +18,6 @@ const arrayColunasTeste = [
     field: 'data', 
     renderGraph: true,
     type: 'date',
-    virtualizedWidth: 380
-
-  },
-  { 
-    title: 'Data Atual no title consertado', 
-    field: 'data', 
-    renderGraph: true,
-    type: 'date',
-    virtualizedWidth: 380
-
   },
 
 ]

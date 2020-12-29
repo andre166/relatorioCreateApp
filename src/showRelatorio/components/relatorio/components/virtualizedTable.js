@@ -20,13 +20,13 @@ class GridBody extends React.PureComponent {
     this.state = {
       columnWidth: 75,
       columnCount: 50,
-      heightGeral: this.props.tableHeight || 300,
+      heightGeral: this.props.tableHeight || 240,
       overscanColumnCount: 0,
       overscanRowCount: 5,
       rowHeight: 40,
       rowCount: 100,
       headerHeight: 50,
-      headerTitleHeight: 120,
+      headerTitleHeight: 90,
       showTableRows: true,
       larguraDaTabela: ''
     };
@@ -113,10 +113,10 @@ class GridBody extends React.PureComponent {
                   <AutoSizer disableHeight>
                     {({width, height}) => (
                             <ColumnSizer
-                                columnMaxWidth={800}
+                                columnMaxWidth={950}
                                 columnMinWidth={150}
                                 columnCount={this.props.virtualizedTableColum.length}
-                                width={width}
+                                width={width * this.props.virtualWidth}
                                 height={height}
                                 >
                                   
@@ -223,14 +223,10 @@ class GridBody extends React.PureComponent {
     let filterProps = this.props.localization;
 
     return (
-      <TableCell className={classes.cell} key={key} style={style}>
-
-          <div>
-            <MTableHeader {...props} colunas={[this.props.columns[columnIndex]]} setShowTableRows={this.setShowTableRows} />
-          </div>
-
-          <div>
+      <div className={classes.headerCell} style={style} key={key}>
+    
             <MTableFilterRow
+            sortingLabel={<MTableHeader {...props} colunas={[this.props.columns[columnIndex]]} setShowTableRows={this.setShowTableRows} />}
             columns={[this.props.columns[columnIndex]]}
             icons={this.props.icons}
             hasActions={
@@ -258,8 +254,7 @@ class GridBody extends React.PureComponent {
             scrollWidth={this.props.scrollWidth}
           />
 
-          </div>
-      </TableCell>
+        </div>
     )
 
   }
@@ -311,8 +306,6 @@ class GridBody extends React.PureComponent {
 
     const { classes } = this.props
 
-    console.log("style={style}", style)
-
     if( this.props.renderData.length == 0 && rowIndex == 0){ //Força a tabla a manter sua largura original caso não haja registro
       return <div style={{position: 'absolute', background: '#FFF4E5', 
       width: '100%', padding: 5, margin: 5, display: 'flex', alignItems: 'center'}}> <InfoIcon style={{marginRight: 4}}/> Nenhum registro</div>
@@ -322,9 +315,9 @@ class GridBody extends React.PureComponent {
       return (
 
         // <TableCell align="right" className={classes.cell} key={key} style={style}>
-        <div className={classes.BodyCell} style={style}>
+        <TableCell className={classes.BodyCell} style={style}>
           {this.props.renderData[rowIndex][this.props.virtualizedTableColum[columnIndex]]}
-        </div>
+        </TableCell>
       );
 
     }

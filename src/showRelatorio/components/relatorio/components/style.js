@@ -28,17 +28,7 @@ export const styles = {
     BodyGrid : {
       width: '100%',
     },
-    BodyCell: {
-      borderBottom: '1px solid rgba(224, 224, 224, 1)',
-      display: 'flex',
-      alignItems: 'center',
-      fontFamily: "Roboto, Helvetica, Arial, sans-serif",
-      borderSpacing: 0,
-      borderCollapse: 'collapse',
-      color: 'rgba(0, 0, 0, 0.87)',
-      fontSize: '0.8125rem',
-      fontWeight: 400,
-    },
+
     cell: {
       width: '100%',
       height: '100%',
@@ -72,7 +62,26 @@ export const styles = {
     },
     
     headerCell: {
-      textAlign: 'center !important',
-      boxSizing: 'border-box',
-    }
+      padding: '4px 24px',
+      display: 'flex',
+      flexDirection: 'column',
+      borderBottom: '1px solid rgba(224, 224, 224, 1)',
+      height: '80px !important',
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    BodyCell: {
+      padding: '4px 24px',
+      borderBottom: '1px solid rgba(224, 224, 224, 1)',
+      display: 'flex',
+      alignItems: 'center',
+      fontFamily: "Roboto, Helvetica, Arial, sans-serif",
+      borderSpacing: 0,
+      borderCollapse: 'collapse',
+      color: 'rgba(0, 0, 0, 0.87)',
+      fontSize: '0.8125rem',
+      fontWeight: 400,
+      wordBreak: 'break-word',
+      justifyContent: 'center'
+    },
 }

@@ -39,7 +39,7 @@ class MTableFilterRow extends React.Component {
   LookupFilter = ({columnDef}) => (
 
     <FormControl>
-      <InputLabel htmlFor="select-multiple-checkbox">{columnDef.filterPlaceholder}</InputLabel>
+      <div htmlFor="select-multiple-checkbox">{this.props.sortingLabel}</div>
       <Select
         multiple
         value={columnDef.tableData.filterValue || []}
@@ -93,38 +93,41 @@ class MTableFilterRow extends React.Component {
     const FilterIcon = this.props.icons.Filter;
 
     return (
-      <TextField
-        style={columnDef.type === "numeric" && { float: "right" } || {}}
-        type={columnDef.type === "numeric" ? "number" : "search"}
-        value={columnDef.tableData.filterValue || ""}
-        placeholder={this.getLocalizedFilterPlaceHolder(columnDef)}
-        onChange={(event) => {
-          this.props.onFilterChanged(
-            columnDef.tableData.id,
-            event.target.value
-          );
-        }}
-        inputProps={{ "aria-label": `filter data by ${columnDef.title}` }}
-        InputProps={
-          this.props.hideFilterIcons || columnDef.hideFilterIcon
-            ? undefined
-            : {
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Tooltip title={localization.filterTooltip}>
-                      <FilterIcon />
-                    </Tooltip>
-                  </InputAdornment>
-                ),
-              }
-        }
-      />
+
+      <FormControl>
+        <div htmlFor="select-multiple-checkbox">{this.props.sortingLabel}</div>
+        <TextField
+          style={columnDef.type === "numeric" && { float: "right" } || {}}
+          type={columnDef.type === "numeric" ? "number" : "search"}
+          value={columnDef.tableData.filterValue || ""}
+          placeholder={this.getLocalizedFilterPlaceHolder(columnDef)}
+          onChange={(event) => {
+            this.props.onFilterChanged(
+              columnDef.tableData.id,
+              event.target.value
+            );
+          }}
+          inputProps={{ "aria-label": `filter data by ${columnDef.title}` }}
+          InputProps={
+            this.props.hideFilterIcons || columnDef.hideFilterIcon
+              ? undefined
+              : {
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Tooltip title={localization.filterTooltip}>
+                        <FilterIcon />
+                      </Tooltip>
+                    </InputAdornment>
+                  ),
+                }
+          }
+        />
+      </FormControl>
+
     );
   };
 
   renderDateTypeFilter = (columnDef) => {
-
-    // const larg = columnDef.virtualizedWidth - 15;
 
     const onDateInputChange = (date) =>
       this.props.onFilterChanged(columnDef.tableData.id, date);
@@ -137,8 +140,7 @@ class MTableFilterRow extends React.Component {
 
     let dateInputElement = null;
     if (columnDef.type === "date") {
-      // dateInputElement = <CustomPicker {...pickerProps} largura={larg}/>;
-      dateInputElement = <CustomPicker {...pickerProps}/>;
+      dateInputElement = <CustomPicker sortingLabel={this.props.sortingLabel} {...pickerProps}/>;
     } else if (columnDef.type === "datetime") {
       dateInputElement = <CustomPicker {...pickerProps} />;
     } else if (columnDef.type === "time") {

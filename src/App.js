@@ -60,13 +60,16 @@ async array1(){
           <ShowRelatorio 
           // relatorio={consolidado} 
           // customColumns ={customColumns}
+          // virtualWidth={3.5}
 
-          relatorio={arrayDadosTeste} 
-          customColumns ={ arrayColunasTeste}
-          // relatorio={rela} 
-          // customColumns={ cc}
+          // relatorio={arrayDadosTeste} 
+          // customColumns ={ arrayColunasTeste}
+          // virtualWidth={1}
+
+          relatorio={rela} 
+          customColumns={ cc}
+          virtualWidth={2}
           
-          // tableHeight={400}
           />
 
       </div>

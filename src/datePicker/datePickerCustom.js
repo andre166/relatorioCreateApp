@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import DateFnsUtils from "@date-io/date-fns";
 import ptLocale from "date-fns/locale/pt-BR";
 import { MuiPickersUtilsProvider, DatePicker } from "material-ui-pickers";
+import FormControl from "@material-ui/core/FormControl";
 
 class InlineDatePickerDemo extends Component{
 
@@ -46,9 +47,10 @@ class InlineDatePickerDemo extends Component{
        style={{cursor: 'pointer'}}
        
        >
-         <div style={{width: this.props.largura || '100%', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-          <DatePicker
-            style={{marginLeft: 10}}
+
+<FormControl>
+      <div htmlFor="select-multiple-checkbox">{this.props.sortingLabel}</div>
+      <DatePicker
             ref={this.datePickerRef}
             value={this.state.selectedDate} 
             onChange={(e) => this.handleDateChange(e)} 
@@ -57,7 +59,7 @@ class InlineDatePickerDemo extends Component{
             clearLabel="limpar filtro"
             cancelLabel="cancelar"
           />
-         </div>
+</FormControl>
 
       </MuiPickersUtilsProvider>
     );
