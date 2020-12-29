@@ -3,7 +3,6 @@ import RelatorioTable from './components/relatorio/relatorioTable';
 import { Provider } from 'react-redux';
 import PropTypes from 'prop-types';
 import store from './store';
-import { AutoSizer } from 'react-virtualized';
 
 class ShowRelatorio extends Component {
 
@@ -71,7 +70,8 @@ class ShowRelatorio extends Component {
 ShowRelatorio.propTypes = {
   relatorio: PropTypes.array.isRequired,
   customColumns: PropTypes.array,
-  tableHeight: PropTypes.number
+  tableHeight: PropTypes.number,
+  virtualWidth: PropTypes.number
 };
 
 export default ShowRelatorio;

@@ -18,32 +18,16 @@ class GridBody extends React.PureComponent {
     super(props, context);
 
     this.state = {
-      columnWidth: 75,
-      columnCount: 50,
-      heightGeral: this.props.tableHeight || 240,
+      heightGeral: this.props.tableHeight || 300,
       overscanColumnCount: 0,
       overscanRowCount: 5,
       rowHeight: 40,
       rowCount: 100,
-      headerHeight: 50,
       headerTitleHeight: 90,
       showTableRows: true,
-      larguraDaTabela: ''
     };
 
     this.headerRef = React.createRef();
-
-  }
-
-  componentDidMount(){
-
-    if( this.headerRef.current ){
-
-      this.setState({
-        larguraDaTabela: this.headerRef.current.props.width
-      });
-      
-    }
 
   }
 
@@ -53,40 +37,12 @@ class GridBody extends React.PureComponent {
     });
   }
 
-    getColumnWidth = ({index}) => {
-
-        const largura = this.props.larguraVirtualizedTableColum;
-
-        let larguraFinal = [];
-
-        largura.map( (larg, i) => {
-
-        if( i == largura.length -1){
-
-          larguraFinal.push(larg + 40 );
-
-
-        }else if( i == index){
-
-            larguraFinal.push(larg );
-        }
-
-        })
-
-        return larguraFinal[0];
-    
-    }
-
   render() {
     const {
-      columnCount,
-      columnWidth,
       heightGeral,
       overscanColumnCount,
       overscanRowCount,
       rowHeight,
-      rowCount,
-      headerHeight,
       headerTitleHeight
     } = this.state;
     const { classes } = this.props
@@ -166,49 +122,9 @@ class GridBody extends React.PureComponent {
                                 )}
                               </ColumnSizer>
 
-                        // <TableHead>
-                        //   <TableRow>
-                                      
-                        //     <Grid
-                        //       style={{overflow: 'hidden'}}
-                        //       className={classes.HeaderGrid}
-                        //       columnWidth={this.getColumnWidth}
-                        //       columnCount={this.props.virtualizedTableColum.length}
-                        //       height={headerHeight}
-                        //       overscanColumnCount={overscanColumnCount}
-                        //       cellRenderer={this._renderHeaderCell}
-                        //       rowHeight={headerHeight}
-                        //       rowCount={1}
-                        //       scrollLeft={scrollLeft}
-                        //       width={width}
-                        //     />
-                        //   </TableRow>
-                        // </TableHead> 
-
-                        // <div
-                        //   style={{
-                        //     height: heightGeral,
-                        //     width: width,
-                        //   }}>
-                        //   {this.state.showTableRows && <Grid
-                        //     className={classes.BodyGrid}
-                        //     columnWidth={this.getColumnWidth}
-                        //     columnCount={this.props.qtdColunas.length}
-                        //     height={heightGeral}
-                        //     onScroll={onScroll}
-                        //     overscanColumnCount={overscanColumnCount}
-                        //     overscanRowCount={overscanRowCount}
-                        //     cellRenderer={this._renderBodyCell}
-                        //     rowHeight={rowHeight}
-                        //     rowCount={this.props.renderData.length || 1}
-                        //     width={width}
-                        //   />}
-                        // </div>
-
                     )}
                   </AutoSizer>
               </div>
-              // </div>
             );
           }}
         </ScrollSync>
@@ -265,38 +181,34 @@ class GridBody extends React.PureComponent {
     const { classes } = this.props;
 
     return (
-      
-      // <div className={classes.headerCell} key={key} style={style}>
 
-        <MTableFilterRow
-          columns={[this.props.columns[columnIndex]]}
-          icons={this.props.icons}
-          hasActions={
-          this.props.actions.filter(
-              (a) => a.position === "row" || typeof a === "function"
-          ).length > 0
-          }
-          actionsColumnIndex={this.props.options.actionsColumnIndex}
-          onFilterChanged={this.props.onFilterChanged}
-          selection={this.props.options.selection}
-          localization={{
-            ...filterProps,
-          ...this.props.localization.filterRow,
-          dateTimePickerLocalization: this.props.localization
-              .dateTimePickerLocalization,
-          }}
-          hasDetailPanel={!!this.props.detailPanel}
-          detailPanelColumnAlignment={
-          this.props.options.detailPanelColumnAlignment
-          }
-          isTreeData={this.props.isTreeData}
-          filterCellStyle={this.props.options.filterCellStyle}
-          filterRowStyle={this.props.options.filterRowStyle}
-          hideFilterIcons={this.props.options.hideFilterIcons}
-          scrollWidth={this.props.scrollWidth}
-        />
-
-      // </div>
+      <MTableFilterRow
+        columns={[this.props.columns[columnIndex]]}
+        icons={this.props.icons}
+        hasActions={
+        this.props.actions.filter(
+            (a) => a.position === "row" || typeof a === "function"
+        ).length > 0
+        }
+        actionsColumnIndex={this.props.options.actionsColumnIndex}
+        onFilterChanged={this.props.onFilterChanged}
+        selection={this.props.options.selection}
+        localization={{
+          ...filterProps,
+        ...this.props.localization.filterRow,
+        dateTimePickerLocalization: this.props.localization
+            .dateTimePickerLocalization,
+        }}
+        hasDetailPanel={!!this.props.detailPanel}
+        detailPanelColumnAlignment={
+        this.props.options.detailPanelColumnAlignment
+        }
+        isTreeData={this.props.isTreeData}
+        filterCellStyle={this.props.options.filterCellStyle}
+        filterRowStyle={this.props.options.filterRowStyle}
+        hideFilterIcons={this.props.options.hideFilterIcons}
+        scrollWidth={this.props.scrollWidth}
+      />
       
     );
 
@@ -313,8 +225,6 @@ class GridBody extends React.PureComponent {
     }else if( this.props.renderData.length > 0 ){
 
       return (
-
-        // <TableCell align="right" className={classes.cell} key={key} style={style}>
         <TableCell className={classes.BodyCell} style={style}>
           {this.props.renderData[rowIndex][this.props.virtualizedTableColum[columnIndex]]}
         </TableCell>

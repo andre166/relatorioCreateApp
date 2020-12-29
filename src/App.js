@@ -54,27 +54,26 @@ async array1(){
   render(){
     
     return (
-      < div style={{height: '100%'}}>
-
       <div style={{height: '100%'}}>
-          <ShowRelatorio 
-          // relatorio={consolidado} 
-          // customColumns ={customColumns}
-          // virtualWidth={3.5}
 
-          // relatorio={arrayDadosTeste} 
-          // customColumns ={ arrayColunasTeste}
-          // virtualWidth={1}
+        <div style={{height: '100%'}}>
+            <ShowRelatorio 
+            tableHeight={240}
+            // relatorio={consolidado} 
+            // customColumns ={customColumns}
+            // virtualWidth={3.5}
 
-          relatorio={rela} 
-          customColumns={ cc}
-          virtualWidth={2}
-          
-          />
+            // relatorio={arrayDadosTeste} 
+            // customColumns={ arrayColunasTeste}
+            // virtualWidth={1}
 
-      </div>
+            relatorio={rela} 
+            customColumns={ cc}
+            virtualWidth={2}
+            
+            />
 
-      <Table/>
+        </div>
 
       </div>
     );

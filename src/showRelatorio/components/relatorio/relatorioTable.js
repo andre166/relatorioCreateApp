@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { styles } from './relatorioStyles';
 // ======== Material table ========= //
-import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import WarningIcon from '@material-ui/icons/Warning';
 import Button from '@material-ui/core/Button';
 import MaterialTable from 'material-table';
@@ -9,7 +8,6 @@ import MTableBody from './components/mtableBody';
 import tableIcons from './tableIcons';
 import { withStyles } from '@material-ui/core/styles';
 import PieChartDialog from '../pieGraph/pieChartDialog';
-import Paper from '@material-ui/core/Paper';
 // ======== REDUX ========= //
 import { connect } from 'react-redux';
 import { 
@@ -61,8 +59,6 @@ class BasicFiltering extends Component{
 
         this.state = { 
             renderBtn: true,
-            pageSize: 10,
-            pageSizeOptions: [10,20,30]
         }
         
         this.tableRef = React.createRef();
@@ -162,36 +158,6 @@ class BasicFiltering extends Component{
     componentDidMount(){
         
         this.generateDate( this.props );
-        if( this.props.relatorio.length <= 10){
-
-            this.setState({
-                pageSize: this.props.relatorio.length,
-                pageSizeOptions: [],
-            })
-
-        }else if( this.props.relatorio.length > 10 && this.props.relatorio.length < 50){
-
-            this.setState({
-                pageSizeOptions: [10, 20, 50],
-            })
-
-        }else if( this.props.relatorio.length >= 50 && this.props.relatorio.length <= 300){
-
-            this.setState({
-                pageSizeOptions: [10, 20, 50],
-            })
-
-        }else if( this.props.relatorio.length > 300 && this.props.relatorio.length < 1000){
-            this.setState({
-                pageSizeOptions: [10, 50, 100],
-            })
-        }else if( this.props.relatorio.length >= 1000 ){
-
-            this.setState({
-                pageSize: 50,
-                pageSizeOptions: [10, 50, 100],
-            })
-        }
 
     }
 
@@ -312,7 +278,7 @@ class BasicFiltering extends Component{
                 
                 }
                 
-                {this.props.isVisibleTable === true && this.props.showError === false? 
+                {this.props.isVisibleTable === true && this.props.showError === false &&
                     <MaterialTable  
                         style={{height: '100%'}}
                         tableRef={this.tableRef}
@@ -427,7 +393,7 @@ class BasicFiltering extends Component{
                     
                     />
                 
-                : '' }
+                }
 
             </div>
 
